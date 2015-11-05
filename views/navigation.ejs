@@ -18,9 +18,13 @@
                 <ul class="dropdown-menu">
                     <li><a href="#">Associated Projects</a></li>
                     <li><a href="#">Something here</a></li>
-                    <li><a href="#">Something else here</a></li>
+                    <li><a href="/admin/logout?redir=<%=page.path%>">Log Out</a></li>
                     <li role="separator" class="divider"></li>
-                    <li><a href="/admin">My Account</a></li>
+                    <li><a href="/admin">My Account
+                        <% if(typeof session == 'undefined') {%>
+                            (Log In)
+                        <% } %>
+                    </a></li>
                 </ul>
             </li>
         </ul>

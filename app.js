@@ -22,6 +22,19 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(function(req, res, next) {
+    app.locals = {
+        app: {
+            version: 0.1
+        },
+        page: {
+            path: req.path
+        }
+    };
+    next();
+});
+
+//Add all the routes into the app
 app.use(['/','/home'], routes);
 app.use(projects);
 app.use(manage);
@@ -33,28 +46,19 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
-
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
-    res.render('error', {
-      message: err.message,
-      error: err
-    });
-  });
-}
-
-// production error handler
-// no stacktraces leaked to user
 app.use(function(err, req, res, next) {
-  res.status(err.status || 500);
-  res.render('error', {
-    message: err.message,
-    error: {}
-  });
+    res.status(err.status || 500);
+
+    if(err.status == 404) {
+        res.render('404');
+    } else {
+        res.render('error', {
+            message: err.message,
+            error: err
+        })
+    }
 });
 
 module.exports = app;

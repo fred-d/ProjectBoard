@@ -1,10 +1,4 @@
-logs
-*.log
-npm-debug.log*
-*.pid
-*.seed
-
-node_modules
+/node_modules
 
 #InteliJ Metadata
 .idea

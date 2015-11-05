@@ -9,7 +9,45 @@
 <body>
 <% include navigation %>
 <div class="container">
-    filter: <%=filter%>
+    <div class="row">
+        <div class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <b>Heads Up!</b> This doesn't even work, fool - It's just a POC.
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <h2>Current Filter: <%=filter%></h2>
+            <pre><%=page.path%></pre>
+        </div>
+        <div class="col-md-4">
+            <div class="panel panel-default">
+                <div class="panel-heading">Available Filters</div>
+                <div class="panel-body">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li <%if(page.path=='/projects/all' || page.path=="/projects"){%>class="active"<%}%>>
+                            <a href="/projects/all">All Projects</a>
+                        </li>
+                        <li <%if(page.path=='/projects/proposed'){%>class="active"<%}%>>
+                            <a href="/projects/proposed">Proposed Projects</a>
+                        </li>
+                        <li <%if(page.path=='/projects/approved'){%>class="active"<%}%>>
+                            <a href="/projects/approved">Approved Projects</a>
+                        </li>
+                        <li <%if(page.path=='/projects/in-progress'){%>class="active"<%}%>>
+                            <a href="/projects/in-progress">In-Progress Projects</a>
+                        </li>
+                        <li>Sort by:</li>
+                        <li class="active"><a href="#">Newest</a></li>
+                        <li><a href="#">Oldest</a></li>
+                        <li><a href="#">Most Popular</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <% include footer %>
 </body>
