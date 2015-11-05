@@ -1,0 +1,72 @@
+html, body {
+    height: 100%;
+}
+.navbar-brand img {
+    width: auto;
+    height: 100%;
+}
+
+#footer {
+    margin-top: 30px;
+    border-top: solid #222 2px;
+    position: relative;
+    background-color: #333;
+    width: 100%;
+    min-height: 100px;
+}
+#footer-final {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    position: absolute;
+    bottom: 0;
+    background-color: #222;
+    width: 100%;
+}
+
+div#footer-final {
+    background: center center url("/images/Logo-White.png") #222 no-repeat;
+    background-size: 25px;
+    font-size: 12pt;
+    color: #AAAAAA;
+    padding-right: 20px;
+    padding-left: 20px;
+    vertical-align: middle;
+}
+/* Clearfix */
+div#footer-final:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+div#footer-final div#badges {
+    float: left;
+}
+div#footer-final div#love {
+    float: right;
+}
+div#footer-final a:visited {
+    color: #AAAAAA;
+    text-underline: single;
+}
+div#footer-final a {
+    color: #AAAAAA;
+    text-underline: single;
+}
+div#footer-final a:active {
+    color: #AAAAAA;
+    text-underline: none;
+}
+div#footer-final p {
+    margin: 0;
+}
+div#footer-final p, div#footer-final a {
+    line-height: 50px;
+}
+
+.container {
+    min-height: calc(100% - 201px);
+}
+
+.table td {
+    text-align: center;
+}

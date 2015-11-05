@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title><%= title %> - A TWD Project</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://octicons.github.com/components/octicons/octicons/octicons.css">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+<body>
+<% include navigation %>
+<div class="container">
+    <div class="col-sm-4" style="height: auto;">
+        <h3>Proposed Projects</h3>
+        <div class="well"></div>
+    </div>
+    <div class="col-sm-4">
+        <h3>Available</h3>
+        <div class="well"></div>
+    </div>
+    <div class="col-sm-4">
+        <h3>In-Progress</h3>
+        <div class="well well-sm">
+            <div class="panel panel-default panel-info">
+                <div class="panel-heading">
+                    <h2 class="panel-title">Example Project</h2><i>Lead: <span style="text-decoration: underline;">John Martin</span></i>
+                </div>
+                <div class="panel-body">
+                    <p>
+                        Lorrum Ipsum Dolor Sit Ammet
+                    </p>
+                </div>
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <span class="glyphicon glyphicon-star"></span> Star
+                            </td>
+                            <td>
+                                <span class="glyphicon glyphicon-globe"></span> View
+                            </td>
+                            <td>
+                                <span class="glyphicon glyphicon-option-horizontal"></span> Details
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<% include footer %>
+</body>
+</body>
+</html>
