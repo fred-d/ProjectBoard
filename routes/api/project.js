@@ -35,7 +35,7 @@ router.post('/api/project/', function(req, res){
 
         r.db('ProjectBoard').table('projects').insert({
             name: req.query.name,
-            author: req.query.author,
+            submitter: req.query.author,
             status: 'proposed',
             approved: false,
             lead: null
