@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 193 279" style="enable-background:new 0 0 193 279;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;fill:#FFFFFF;stroke:#A7DDE9;stroke-miterlimit:10;}
+	.st2{display:inline;fill:none;stroke:#A7DDE9;stroke-miterlimit:10;}
+	.st3{display:inline;}
+	.st4{fill:#324FA2;}
+	.st5{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st6{fill:#209AC4;}
+	.st7{fill:#5462AD;}
+	.st8{display:inline;fill:#FFFFFF;stroke:#000000;stroke-miterlimit:10;}
+	.st9{fill:#C8DC65;}
+	.st10{fill:#BCC959;}
+	.st11{fill:#CE5D6B;}
+	.st12{fill:#C9475D;}
+	.st13{fill:#C65865;}
+	.st14{fill:#B84552;}
+	.st15{fill:#F48282;}
+	.st16{fill:#F26B6C;}
+	.st17{fill:#F3BEBD;}
+	.st18{fill:#F7AAAA;}
+</style>
+<g id="Guide" class="st0">
+	<circle id="XMLID_1_" class="st1" cx="-61.3" cy="121.7" r="68.3"/>
+	<circle id="XMLID_2_" class="st2" cx="-61.3" cy="53.3" r="68.3"/>
+	<line id="XMLID_3_" class="st2" x1="-129.7" y1="121.7" x2="-129.7" y2="53.3"/>
+	<line id="XMLID_4_" class="st2" x1="7" y1="121.7" x2="7" y2="53.3"/>
+	<line id="XMLID_5_" class="st2" x1="-129.7" y1="53.3" x2="-129.7" y2="-15"/>
+	<line id="XMLID_6_" class="st2" x1="7" y1="53.3" x2="7" y2="-15"/>
+	<line id="XMLID_7_" class="st2" x1="-129.7" y1="-15" x2="7" y2="190"/>
+	<line id="XMLID_8_" class="st2" x1="7" y1="-15" x2="-129.7" y2="190"/>
+	<line id="XMLID_9_" class="st2" x1="-129.7" y1="121.7" x2="-129.7" y2="190"/>
+	<line id="XMLID_10_" class="st2" x1="-129.7" y1="190" x2="-61.3" y2="190"/>
+	<line id="XMLID_11_" class="st2" x1="-61.3" y1="190" x2="7" y2="190"/>
+	<line id="XMLID_12_" class="st2" x1="7" y1="190" x2="7" y2="121.7"/>
+	<line id="XMLID_13_" class="st2" x1="-129.7" y1="-15" x2="-61.3" y2="-15"/>
+	<line id="XMLID_14_" class="st2" x1="-61.3" y1="-15" x2="7" y2="-15"/>
+</g>
+<g id="Bud" class="st0">
+</g>
+<g id="Leaf_1" class="st0">
+</g>
+<g id="Leaf_2" class="st0">
+	<g id="XMLID_15_" class="st3">
+		<path id="XMLID_19_" class="st4" d="M-245.3-70.2l14.1,21.2l14.1-21.2l0,0c-3.4-4-8.5-6.6-14.1-6.6
+			C-236.9-76.8-241.9-74.2-245.3-70.2z"/>
+		<path id="XMLID_16_" class="st5" d="M-236.8-62.9"/>
+		<path id="XMLID_18_" class="st6" d="M-217.1-33.3l-32.6-48.9v37c0,10.2,8.3,18.5,18.5,18.5C-225.5-26.8-220.5-29.3-217.1-33.3z"/>
+		<path id="XMLID_22_" class="st5" d="M-225.6-62.9"/>
+		<path id="XMLID_20_" class="st7" d="M-212.7-82.2l-18.5,27.7l14.1,21.2l0,0c2.7-3.2,4.4-7.4,4.4-11.9V-82.2z"/>
+	</g>
+	
+		<text id="XMLID_21_" transform="matrix(1 0 0 1 -210.6917 -26.7524)" class="st3" style="font-family:'Quicksand-Regular'; font-size:47.7941px; letter-spacing:-4;">Tyler Web Dev</text>
+</g>
+<g id="Layer_5" class="st0">
+	<rect id="XMLID_17_" x="-192.2" y="34.6" class="st8" width="177.2" height="177.2"/>
+</g>
+<g id="Layer_6">
+	<polygon id="XMLID_33_" class="st9" points="96.5,261.9 173,185.4 96.5,185.4 	"/>
+	<polygon id="XMLID_32_" class="st10" points="96.5,261.9 20,185.4 96.5,185.4 	"/>
+	<polygon id="XMLID_34_" class="st11" points="173,179.1 96.5,102.6 96.5,179.1 	"/>
+	<polygon id="XMLID_35_" class="st12" points="96.5,102.6 20,179.1 96.5,179.1 	"/>
+	<polygon id="XMLID_36_" class="st13" points="20,179.1 96.5,102.6 20,102.6 	"/>
+	<polygon id="XMLID_37_" class="st14" points="96.5,102.6 20,26.1 20,102.6 	"/>
+	<polygon id="XMLID_38_" class="st15" points="101,98.1 173,170.1 173,98.1 	"/>
+	<polygon id="XMLID_39_" class="st16" points="173,26.1 101,98.1 173,98.1 	"/>
+	<polygon id="XMLID_40_" class="st17" points="29,26.1 96.5,93.6 96.5,26.1 	"/>
+	<polygon id="XMLID_41_" class="st18" points="96.5,93.6 164,26.1 96.5,26.1 	"/>
+</g>
+</svg>

@@ -10,39 +10,49 @@
 <% include navigation %>
 <div class="container">
     <div class="row">
-        <div class="alert alert-info alert-dismissible" role="alert">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-            <b>Heads Up!</b> This doesn't even work, fool - It's just a POC.
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-8">
             <h2>Current Filter: <%=filter%></h2>
-            <pre><%=page.path%></pre>
+            <% for(var i=0; i < projects.length; i++) {%>
+            <% var project = projects[i];%>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <a href="/project/<%=project.id%>"><%=project.name%></a>
+                    </div>
+                    <div class="panel-body">
+                        <p>
+                            status: <%=project.status%>
+                        </p>
+                    </div>
+                </div>
+            <% } %>
         </div>
         <div class="col-md-4">
             <div class="panel panel-default">
                 <div class="panel-heading">Available Filters</div>
                 <div class="panel-body">
                     <ul class="nav nav-pills nav-stacked">
-                        <li <%if(page.path=='/projects/all' || page.path=="/projects"){%>class="active"<%}%>>
-                            <a href="/projects/all">All Projects</a>
+                        <li <%if(filter=='all'){%>class="active"<%}%>>
+                            <a href="/projects/all/<%=order%>">All Projects</a>
                         </li>
-                        <li <%if(page.path=='/projects/proposed'){%>class="active"<%}%>>
-                            <a href="/projects/proposed">Proposed Projects</a>
+                        <li <%if(filter=='proposed'){%>class="active"<%}%>>
+                            <a href="/projects/proposed/<%=order%>">Proposed Projects</a>
                         </li>
-                        <li <%if(page.path=='/projects/approved'){%>class="active"<%}%>>
-                            <a href="/projects/approved">Approved Projects</a>
+                        <li <%if(filter=='available'){%>class="active"<%}%>>
+                            <a href="/projects/available/<%=order%>">Approved and Available Projects</a>
                         </li>
-                        <li <%if(page.path=='/projects/in-progress'){%>class="active"<%}%>>
-                            <a href="/projects/in-progress">In-Progress Projects</a>
+                        <li <%if(filter=='in-progress'){%>class="active"<%}%>>
+                            <a href="/projects/in-progress/<%=order%>">In-Progress Projects</a>
                         </li>
                         <li>Sort by:</li>
-                        <li class="active"><a href="#">Newest</a></li>
-                        <li><a href="#">Oldest</a></li>
-                        <li><a href="#">Most Popular</a></li>
+                        <li <%if(order=='newest'){%>class="active"<%}%>>
+                            <a href="/projects/<%=filter%>/newest">Newest</a>
+                        </li>
+                        <li <%if(order=='oldest'){%>class="active"<%}%>>
+                            <a href="/projects/<%=filter%>/oldest">Oldest</a>
+                        </li>
+                        <li <%if(order=='popular'){%>class="active"<%}%>>
+                            <a href="/projects/<%=filter%>/popular">Most Popular</a>
+                        </li>
                     </ul>
                 </div>
             </div>

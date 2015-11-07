@@ -5,23 +5,17 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var routes = require('./routes/index');
+var home = require('./routes/index');
 var projects = require('./routes/projects');
+var project = require('./routes/project');
 var manage = require('./routes/manage');
+var api = require('./routes/api');
+
+var session = require('./middleware/session');
 
 var app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-
+/* Locals Middleware: adds some context that gets past down to every template */
 app.use(function(req, res, next) {
     app.locals = {
         app: {
@@ -34,10 +28,25 @@ app.use(function(req, res, next) {
     next();
 });
 
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+
 //Add all the routes into the app
-app.use(['/','/home'], routes);
+app.use(home);
 app.use(projects);
+app.use(project);
 app.use(manage);
+
+//Add in the api route handler
+app.use(api);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -59,6 +68,7 @@ app.use(function(err, req, res, next) {
             error: err
         })
     }
+    next();
 });
 
 module.exports = app;

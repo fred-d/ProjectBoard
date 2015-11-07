@@ -32,6 +32,10 @@ div#footer-final {
     padding-left: 20px;
     vertical-align: middle;
 }
+
+
+
+
 /* Clearfix */
 div#footer-final:after {
     content: "";
