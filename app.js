@@ -11,8 +11,6 @@ var project = require('./routes/project');
 var manage = require('./routes/manage');
 var api = require('./routes/api');
 
-var session = require('./middleware/session');
-
 var app = express();
 
 /* Locals Middleware: adds some context that gets past down to every template */

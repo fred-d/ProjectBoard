@@ -36,15 +36,16 @@ router.post('/api/project/', function(req, res){
 
         r.db('ProjectBoard').table('projects').insert({
             name: req.query.name,
-            timestamp: Date.now(),
+            timestamp: Date.now() / 1000, //Generate the current epoch time
             submitter: {
-                name: req.query.author,
-                user: req.app.locals.user.name
+                name: req.query.author, // What does the requester want us to call him
+                user: req.app.locals.user.name // What is the actual name of the authenticated user
             },
-            status: 'proposed',
+            status: 'proposed', // All projects submitted via API *must* be aproved
             approved: false,
-            lead: null
+            lead: null //TODO add the ability to own-up a submitted project
         }).run(conn, function(err, response){
+            if(err) return res.json({success: false, reason: "an unknown database error occurred"});
             res.json({success: true, projectId: response.generated_keys[0]});
         });
     });
