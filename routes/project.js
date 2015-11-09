@@ -1,11 +1,35 @@
 var express = require('express');
-var router = express.Router();
 var r = require("rethinkdb");
 
-/* GET home listing. */
+var router = express.Router();
+
+router.post("/project", function(req, res, next){
+    if(!req.body.ProjectName || !req.body.ProjectSummary || (req.body.ProjectLeader && !req.body.ProjectLeaderName))
+        return new Error("Missing Required Project Information");
+
+    r.connect({host: '159.203.246.210', port: 28015}, function(err, conn){
+        if (err) return new Error('Database Failed to Connect');
+
+        r.db('ProjectBoard').table('projects').insert({
+            name: req.body.projectName,
+            summary: req.body.projectSummary,
+            timestamp: new Date(),
+            submitter: {
+                name: "test",
+                user: "test"
+            },
+            status: 'proposed',
+            approved: false
+        }).run(conn, function(err, response){
+            if(err) {res.status = 500;return res.json({success: false, reason: 'Unknown Database Error', err: err})}
+            //res.redirect("/project/"+response.generated_keys[0]);
+            res.send("Hi");
+        });
+    });
+});
 router.get("/project/:id", function(req, res, next) {
     r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
-        if (err) new Error('Database Failed to Connect');
+        if (err) return new Error('Database Failed to Connect');
 
         r.db('ProjectBoard').table('projects').get(req.params.id).run(conn, function(err, result) {
             if (err) return next(err);

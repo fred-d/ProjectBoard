@@ -74,7 +74,6 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
              r.db('ProjectBoard').table('projects').filter(filterStatement())
                  /*.orderBy(r.desc({ index: 'timestamp'}))*/.run(conn, function(err, cursor)  {//TODO add popularity sort
                  if (err) return new Error('Database Error');
-                 //if (err) return res.json(err); //Pass the error to the screen; you can see RethinkDB is griping about the use of r.desc()
 
                  cursor.toArray(function (err, results) {
                      if (err) return new Error('Database Error');
@@ -84,7 +83,8 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
                  });
              });
          });
-    } else {
+    }
+     else {
          return new Error('Unknown Order');
     }
 });

@@ -3,7 +3,6 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
 
 var home = require('./routes/index');
 var projects = require('./routes/projects');
@@ -11,7 +10,14 @@ var project = require('./routes/project');
 var manage = require('./routes/manage');
 var api = require('./routes/api');
 
+var bodyParser = require('body-parser');
+
 var app = express();
+
+app.use(bodyParser.json());       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+    extended: true
+}));
 
 /* Locals Middleware: adds some context that gets past down to every template */
 app.use(function(req, res, next) {
@@ -32,10 +38,9 @@ app.set('view engine', 'ejs');
 
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 //Add all the routes into the app
 app.use(home);
