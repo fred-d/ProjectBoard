@@ -3,6 +3,5 @@
 @task('deploy', ['on' => 'projectboard'])
 cd /home/projectboard
 git pull
-composer install --no-dev
-service nginx reload
+npm update
 @endtask
