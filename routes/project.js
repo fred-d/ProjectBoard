@@ -3,7 +3,7 @@ var r = require("rethinkdb");
 
 var router = express.Router();
 
-router.post("/project", function(req, res, next){
+router.post("/project", function(req, res){
     if(!req.body.ProjectName || !req.body.ProjectSummary || (req.body.ProjectLeader && !req.body.ProjectLeaderName))
         return new Error("Missing Required Project Information");
 
@@ -22,7 +22,7 @@ router.post("/project", function(req, res, next){
             approved: false
         }).run(conn, function(err, response){
             if(err) {res.status = 500;return res.json({success: false, reason: 'Unknown Database Error', err: err})}
-            //res.redirect("/project/"+response.generated_keys[0]);
+            console.log('hi');
             res.send("Hi");
         });
     });
