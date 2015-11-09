@@ -12,8 +12,12 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
     r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
         if (err) new Error('Database Connection Error');
 
+        var sortOrder = r.desc;
+        if(req.params.order == "newest") sortOrder = r.desc;
+        else if(req.params.order == "oldest") sortOrder = r.asc;
+
         r.db('ProjectBoard').table('projects').filter(function() {
-            switch(req.app.locals.filter) {
+            switch(req.app.locals.filter) { //a parameter received from the MVC controller to specify what items to show
                 default:
                 case "all":
                     return {};
@@ -28,13 +32,27 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
                     return {status: "in-progress"};
                     break;
             }
-        }).run(conn, function(err, cursor) {
-            if (err) new Error('Database Error');
+        }).orderBy(sortOrder(function(){
+            switch(req.app.locals.order) { //a parameter received from the MVC controller to specify the list order
+                default:
+                case "newest": //Sort from newest to oldest
+                    return { index: 'timestamp'};
+                    break;
+                case "oldest": //Sort from oldest to newest
+                    return {index: 'timestamp'};
+                    break;
+                case "popular":
+                    return {};//TODO add a popularity system to tie into
+                    break
+            }
+        })).run(conn, function(err, cursor)  {
+            //if (err) return new Error('Database Error');
+            if (err) return res.json(err); //Pass the error to the screen; you can see RethinkDB is griping about the use of r.desc()
 
-            cursor.toArray(function (err, result) {
-                if (err) new Error('Database Error');
+            cursor.toArray(function (err, results) {
+                if (err) next(new Error('Database Error'));
 
-                req.app.locals.projects = result;
+                req.app.locals.projects = results;
                 next();
             });
         });

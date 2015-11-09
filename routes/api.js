@@ -5,19 +5,31 @@ var router = express.Router();
 var projectController = require('./api/project');
 
 router.all('/api(*)?', function(req, res, next){
-    console.log('api hit!');
-
     r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
         if (err) {
+            console.log(err);
             res.status = 500;
             return res.json({success: false, reason: 'Database Connection Error'});
         }
-        r.db('ProjectBoard').table('users')
+        if(!req.query.apikey) return res.json({success: false, reason: 'Missing required field `apikey`'})
+
+        r.db('ProjectBoard').table('users').getAll(req.query.apikey, {index: 'apikey'}).run(conn, function(err, cursor){
+            if (err) {
+                console.log(err);
+                res.status = 500;
+                return res.json({success: false, reason: 'Database Connection Error'});
+            }
+            cursor.toArray(function(err, result){
+                if(result.length == 0 && result.length > 1) {
+                    res.status = 400;
+                    return res.json({success: false, reason: "Invalid API key"});
+                }
+                req.app.locals.user = result[0];
+                console.log(result[0]);
+                next();
+            });
+        });
     });
-
-    r.db('ProjectBoard').table('users')
-
-    next();
 });
 
 router.all('/api/project(*)?', projectController);
