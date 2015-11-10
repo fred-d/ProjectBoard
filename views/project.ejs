@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title><%= title %> - A TWD Project</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="https://octicons.github.com/components/octicons/octicons/octicons.css">
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+  <title><%= title %> - A TWD Project</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://octicons.github.com/components/octicons/octicons/octicons.css">
+  <link rel='stylesheet' href='/stylesheets/style.css' />
 </head>
 <body>
 <% include navigation %>
 <div class="container">
-    <h2>Project: <%=project.name%></h2>
-    <h4>Submitted by <%=project.submitter.name%>
-        <% if(project.submitter.name!=project.submitter.user) {%>
+  <h2><%=project.name%></h2>
+    <h4>by <%=project.submitter.name%>
+      <% if(project.submitter.name!=project.submitter.user) {%>
         <small>via <%=project.submitter.user%></small>
-        <%}%>
+      <%}%>
     </h4>
 </div>
 <% include footer %>

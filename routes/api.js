@@ -11,7 +11,7 @@ router.all('/api(*)?', function(req, res, next){
             res.status = 500;
             return res.json({success: false, reason: 'Database Connection Error'});
         }
-        if(!req.query.apikey) return res.json({success: false, reason: 'Missing required field `apikey`'})
+        if(!req.query.apikey) return res.json({success: false, reason: 'Missing required field `apikey`'});
 
         r.db('ProjectBoard').table('users').getAll(req.query.apikey, {index: 'apikey'}).run(conn, function(err, cursor){
             if (err) {
