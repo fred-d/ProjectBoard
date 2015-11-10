@@ -7,6 +7,8 @@ could of been solved via a notepad, we designed an entire program for tracking
 projects, their status, and contributors.
 
 ### Setting up a Development Environment
+ProjectBoard was written in Nodejs with Express and RethinkDB.
+
 1. Get the codebase `git clone https://github.com/TylerWebDev/ProjectBoard.git`
 2. Enter the newly made directory `cd ProjectBoard/`
 3. Get the necessary dependencies `npm install`
