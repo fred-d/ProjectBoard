@@ -20,12 +20,11 @@ router.all('/api(*)?', function(req, res, next){
                 return res.json({success: false, reason: 'Database Connection Error'});
             }
             cursor.toArray(function(err, result){
-                if(result.length == 0 || result.length > 1) {
+                if(result.length != 1) {
                     res.status = 400;
                     return res.json({success: false, reason: "Invalid API key"});
                 }
                 req.app.locals.user = result[0];
-                console.log(result[0]);
                 next();
             });
         });

@@ -3,12 +3,12 @@ var r = require("rethinkdb");
 
 var router = express.Router();
 
-router.post("/project", function(req, res){
+router.post("/project", function(req, res, next){
     if(!req.body.ProjectName || !req.body.ProjectSummary || (req.body.ProjectLeader && !req.body.ProjectLeaderName))
-        return new Error("Missing Required Project Information");
+        next(new Error("Missing Required Project Information"));
 
     r.connect({host: '159.203.246.210', port: 28015}, function(err, conn){
-        if (err) return new Error('Database Failed to Connect');
+        if (err) next(new Error('Database Failed to Connect'));
 
         r.db('ProjectBoard').table('projects').insert({
             name: req.body.projectName,

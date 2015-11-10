@@ -1,7 +1,0 @@
----
-  - name: "install projectboard project"
-    git: repo=git@github.com:TylerWebDev/Tyler-Sirens.git dest=/home/projectboard clone=yes accept_hostkey=yes
-    notify:
-      - restart nginx
-  - name: "install projectboard project dependencies"
-    composer: command=install working_dir=/home/projectboard
