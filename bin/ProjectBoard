@@ -8,6 +8,10 @@ var app = require('../app');
 var debug = require('debug')('ProjectBoard:server');
 var http = require('http');
 
+if(!process.env.npm_package_config_port) process.env.npm_package_config_port = 3012;
+if(!process.env.npm_package_db_addr) process.env.npm_package_db_addr = "159.203.246.210";
+if(!process.env.npm_package_db_port) process.env.npm.package_db_port = 28015;
+
 /**
  * Get port from environment and store in Express.
  */
