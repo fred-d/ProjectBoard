@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "pm2 start ./bin/ProjectBoard --name projectboard -s",
-    "install": "/bin/install"
+    "install": "./bin/install"
   },
   "dependencies": {
     "config": "~1.16.0",
