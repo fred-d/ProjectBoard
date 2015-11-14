@@ -1,5 +1,4 @@
 /node_modules
 /.idea
 /*.log
-/config/*
-!/config/default.json.sample
+/config/*.json
