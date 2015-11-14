@@ -1,9 +1,10 @@
 var express = require('express');
 var r = require('rethinkdb');
 var router = express.Router();
+var config = require('config');
 
 router.get("/api/project/:project", function(req, res) {
-    r.connect({host: '159.203.246.210', port: 28015}, function(err, conn){
+    r.connect(config.get('database'), function(err, conn){
         if(err) {
             res.status = 500;
             return res.json({success: false, reason: 'Database Connection Error'});
@@ -26,7 +27,7 @@ router.post('/api/project/', function(req, res){
     if(!req.query.name) return res.json({success: false, reason: "'name' is a required field"});
     if(!req.query.author) return res.json({success: false, reason: "'author' is a required field"});
 
-    r.connect({host: '159.203.246.210', port: 28015}, function(err, conn){
+    r.connect(config.get('database'), function(err, conn){
         if(err) {res.status = 500;return res.json({success: false, reason: 'Database Connection Error', err: err})}
 
             r.db('ProjectBoard').table('projects').getAll(req.query.name, {index:'name'}).run(conn, function(err, cursor) {

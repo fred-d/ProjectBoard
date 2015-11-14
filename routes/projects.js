@@ -1,5 +1,6 @@
 var express = require('express');
 var r = require('rethinkdb');
+var config = require('config');
 
 var router = express.Router();
 var projects;
@@ -28,7 +29,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
     };
 
      if(req.app.locals.order == 'newest') {
-        r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
+        r.connect(config.get('database'), function(err, conn) {
             if (err) return new Error('Database Connection Error');
 
             r.db('ProjectBoard').table('projects').filter(filterStatement())
@@ -48,8 +49,8 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
         });
     }
      else if(req.app.locals.order == 'oldest') {
-         r.connect({host: '159.203.246.210', port: 28015}, function (err, conn) {
-             if (err) return new Error('Database Connection Error');
+         r.connect(config.get('database'), function (err, conn) {
+             if (err) return next(new Error('Database Connection Error'));
 
              r.db('ProjectBoard').table('projects').filter(filterStatement())
                  .orderBy(r.asc('timestamp')).run(conn, function(err, cursor)  {
@@ -68,7 +69,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
          });
      }
      else if(req.app.locals.order == "popular") {
-         r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
+         r.connect(config.get('database'), function(err, conn) {
              if (err) return new Error('Database Connection Error');
 
              r.db('ProjectBoard').table('projects').filter(filterStatement())

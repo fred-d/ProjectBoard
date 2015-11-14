@@ -1,0 +1,10 @@
+{
+  "web": {
+    "port": 3012,
+    "address": "0.0.0.0"
+  },
+  "database": {
+    "host": "example.org",
+    "port": 28015
+  }
+}

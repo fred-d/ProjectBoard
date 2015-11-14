@@ -1,11 +1,12 @@
 var express = require('express');
 var r = require('rethinkdb');
 var router = express.Router();
+var config = require('config');
 
 var projectController = require('./api/project');
 
 router.all('/api(*)?', function(req, res, next){
-    r.connect({host: '159.203.246.210', port: 28015}, function(err, conn) {
+    r.connect(config.get('database'), function(err, conn) {
         if (err) {
             console.log(err);
             res.status = 500;

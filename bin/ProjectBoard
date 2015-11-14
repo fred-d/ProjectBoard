@@ -7,16 +7,13 @@
 var app = require('../app');
 var debug = require('debug')('ProjectBoard:server');
 var http = require('http');
-
-if(!process.env.npm_package_config_port) process.env.npm_package_config_port = 3012;
-if(!process.env.npm_package_db_addr) process.env.npm_package_db_addr = "159.203.246.210";
-if(!process.env.npm_package_db_port) process.env.npm.package_db_port = 28015;
+var config = require('config');
 
 /**
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.npm_package_config_port || '3012');
+var port = normalizePort(config.get('web.port'));
 app.set('port', port);
 
 /**
@@ -29,7 +26,7 @@ var server = http.createServer(app);
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, config.get('web.hostname'));
 server.on('error', onError);
 server.on('listening', onListening);
 

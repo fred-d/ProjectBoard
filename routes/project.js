@@ -2,12 +2,13 @@ var express = require('express');
 var r = require("rethinkdb");
 
 var router = express.Router();
+var config = require('config');
 
 router.post("/project", function(req, res, next){
     if(!req.body.projectName || !req.body.projectSummary || (req.body.projectLeader && !req.body.projectLeaderName))
         return next(new Error("Missing Required Project Information"));
 
-    r.connect({host: process.env.npm_package_config_port, port: 28015}, function(err, conn){
+    r.connect(config.get('database'), function(err, conn){
         if (err) return next(new Error('Database Failed to Connect'));
 
         r.db('ProjectBoard').table('projects').insert({
@@ -27,7 +28,7 @@ router.post("/project", function(req, res, next){
     });
 });
 router.get("/project/:id", function(req, res, next) {
-    r.connect({host: process.env.npm_package_config_port, port: 28015}, function(err, conn) {
+    r.connect(config.get('database'), function(err, conn) {
         if (err) return new Error('Database Failed to Connect');
 
         r.db('ProjectBoard').table('projects').get(req.params.id).run(conn, function(err, result) {
