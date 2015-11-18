@@ -1,10 +1,21 @@
 {
   "web": {
     "port": 3000,
-    "address": "0.0.0.0"
+    "hostname": "0.0.0.0"
   },
   "database": {
-    "host": "example.org",
-    "port": 28015
+    "host": "rethink.example.com",
+    "port": 28015,
+    "db": "ProjectBoard",
+    "authKey": "Swordfish"
+  },
+  "auth": {
+    "github": {
+      "client-id": "12345678901234567890e",
+      "client-secret": "06c4b04b9f9d57c3357ca8766b3fb93e1220d446c3"
+    }
+  },
+  "crypto": {
+    "secret": "57b30a54352c2740eccb0818dfc5bec6de23157dba8f057f60db09901e531647"
   }
 }
