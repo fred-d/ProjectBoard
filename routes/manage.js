@@ -26,7 +26,7 @@ passport.use(new pGithubStrat({
 router.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
 router.get('/auth/local', passport.authenticate('local'));
 
-router.get('/auth/callback',
+router.get('/login/callback',
   passport.authenticate('github', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication, redirect home.
