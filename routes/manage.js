@@ -23,7 +23,7 @@ passport.use(new pGithubStrat({
   }
 ));
 
-router.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email' ] }));
+router.get('/auth/github', passport.authenticate('github', { scope: [ 'user:email','read:org' ] }));
 router.get('/auth/local', passport.authenticate('local'));
 
 router.get('/login/callback',
