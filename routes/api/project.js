@@ -10,7 +10,7 @@ router.get("/api/project/:project", function(req, res) {
             return res.json({success: false, reason: 'Database Connection Error'});
         }
 
-        r.db('ProjectBoard').table('projects').get(req.params.project).run(conn, function(err, result){
+        r.table('projects').get(req.params.project).run(conn, function(err, result){
             if(err) {
                 res.status = 500;
                 return res.json({success: false, reason: 'Database Transaction Error'});
@@ -30,7 +30,7 @@ router.post('/api/project/', function(req, res){
     r.connect(config.get('database'), function(err, conn){
         if(err) {res.status = 500;return res.json({success: false, reason: 'Database Connection Error', err: err})}
 
-            r.db('ProjectBoard').table('projects').getAll(req.query.name, {index:'name'}).run(conn, function(err, cursor) {
+            r.table('projects').getAll(req.query.name, {index:'name'}).run(conn, function(err, cursor) {
                 if(err) {res.status = 500;return res.json({success: false, reason: 'Unknown Database Error', err: err})}
                 cursor.toArray(function (err, results) {
                     if(results.length!=0) {
@@ -40,7 +40,7 @@ router.post('/api/project/', function(req, res){
                     }
                 });
 
-                r.db('ProjectBoard').table('projects').insert({
+                r.table('projects').insert({
                     name: req.query.name,
                     timestamp: new Date(), // RethinkDB will accept this as a valid current-time object
                     submitter: {

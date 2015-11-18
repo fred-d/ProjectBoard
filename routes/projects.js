@@ -32,7 +32,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
         r.connect(config.get('database'), function(err, conn) {
             if (err) return new Error('Database Connection Error');
 
-            r.db('ProjectBoard').table('projects').filter(filterStatement())
+            r.table('projects').filter(filterStatement())
                 .orderBy(r.desc('timestamp')).run(conn, function(err, cursor)  {
                 if (err) return res.render('error', {
                     message: 'Database Error',
@@ -52,7 +52,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
          r.connect(config.get('database'), function (err, conn) {
              if (err) return next(new Error('Database Connection Error'));
 
-             r.db('ProjectBoard').table('projects').filter(filterStatement())
+             r.table('projects').filter(filterStatement())
                  .orderBy(r.asc('timestamp')).run(conn, function(err, cursor)  {
                  if (err) return res.render('error', {
                      message: 'Database Error',
@@ -72,7 +72,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
          r.connect(config.get('database'), function(err, conn) {
              if (err) return new Error('Database Connection Error');
 
-             r.db('ProjectBoard').table('projects').filter(filterStatement())
+           r.table('projects').filter(filterStatement())
                  /*.orderBy(r.desc({ index: 'timestamp'}))*/.run(conn, function(err, cursor)  {//TODO add popularity sort
                  if (err) return new Error('Database Error');
 

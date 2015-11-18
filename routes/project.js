@@ -11,7 +11,7 @@ router.post("/project", function(req, res, next){
     r.connect(config.get('database'), function(err, conn){
         if (err) return next(new Error('Database Failed to Connect'));
 
-        r.db('ProjectBoard').table('projects').insert({
+        r.table('projects').insert({
             name: req.body.projectName,
             summary: req.body.projectSummary,
             timestamp: new Date(),
@@ -31,7 +31,7 @@ router.get("/project/:id", function(req, res, next) {
     r.connect(config.get('database'), function(err, conn) {
         if (err) return new Error('Database Failed to Connect');
 
-        r.db('ProjectBoard').table('projects').get(req.params.id).run(conn, function(err, result) {
+        r.table('projects').get(req.params.id).run(conn, function(err, result) {
             if (err) return next(err);
             if (!result) {
                 var err = new Error('Not Found');

@@ -1,5 +1,6 @@
 var express = require('express');
 var session = require('express-session');
+var sessionRDBConnector = require('session-rethinkdb');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -14,7 +15,13 @@ var api = require('./routes/api');
 
 
 var app = express();
-app.use(session({ secret: 'keyboard cat' }));
+app.use(session({
+  secret: config.get('crypto.secret'),
+  //store: new sessionRDBConnector(config.get('database')),
+  resave: true,
+  name: '_pbsid',
+  saveUninitialized: true
+}));
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
