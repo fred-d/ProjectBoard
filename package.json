@@ -1,17 +1,17 @@
 {
-  "name": "ProjectBoard",
+  "name": "projectboard",
   "author": "John 'looklittlejohn' Martin",
   "version": "0.0.1",
-  "private": true,
-  "bugs": {
-    "url" : "https://github.com/owner/project/issues",
-    "email" : "looklittlejohn@protonmail.com"
-  },
+  "license": "MIT",
+  "repository" : "TylerWebDev/ProjectBoard",
   "scripts": {
     "start": "pm2 start ./bin/ProjectBoard --name projectboard -s",
-    "install": "node ./bin/install"
+    "install": "node ./bin/install",
+    "test": ""
   },
   "dependencies": {
+    "passport": "~0.3.2",
+    "passport-github2": "~0.1.9",
     "config": "~1.16.0",
     "pm2": "~0.15.10",
     "body-parser": "~1.13.3",
@@ -19,6 +19,7 @@
     "debug": "~2.2.0",
     "ejs": "~2.3.3",
     "express": "~4.13.1",
+    "express-session": "~1.12.1",
     "hashids": "~1.0.1",
     "morgan": "~1.6.1",
     "rethinkdb": "~2.1.1",
