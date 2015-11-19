@@ -18,7 +18,7 @@ ProjectBoard was written in Nodejs with Express and RethinkDB.
 
 ### Legal
 
-Copyright 2015 John Martin
+Copyright 2015 TylerWebDev and John 'looklittlejohn' Martin
 
 ```
 This program is free software: you can redistribute it and/or modify

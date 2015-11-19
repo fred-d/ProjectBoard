@@ -90,7 +90,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
     }
 });
 
-router.get(['/projects','/projects/all(/:order)?'], function(req, res, next) {
+router.get(['/projects','/projects/all(/:order)?'], function(req, res) {
     res.render('projects',
         {
            title: 'View All Projects',
@@ -99,7 +99,7 @@ router.get(['/projects','/projects/all(/:order)?'], function(req, res, next) {
     );
 });
 
-router.get('/projects/in-progress(/:order)?', function(req, res, next) {
+router.get('/projects/in-progress(/:order)?', function(req, res) {
     res.render('projects',
         {
             title: 'View In-Progress Projects',
@@ -108,7 +108,7 @@ router.get('/projects/in-progress(/:order)?', function(req, res, next) {
     );
 });
 
-router.get('/projects/proposed(/:order)?', function(req, res, next) {
+router.get('/projects/proposed(/:order)?', function(req, res) {
     res.render('projects',
         {
             title: 'View Proposed Projects',
@@ -117,7 +117,7 @@ router.get('/projects/proposed(/:order)?', function(req, res, next) {
     );
 });
 
-router.get('/projects/available(/:order)?', function(req, res, next) {
+router.get('/projects/available(/:order)?', function(req, res) {
     res.render('projects',
         {
             title: 'View Approved and Available Projects',
