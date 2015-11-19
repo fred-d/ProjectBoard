@@ -10,9 +10,6 @@
     "test": ""
   },
   "dependencies": {
-    "passport": "~0.3.2",
-    "passport-github2": "~0.1.9",
-    "passport-local": "~1.0.0",
     "config": "~1.16.0",
     "pm2": "~0.15.10",
     "body-parser": "~1.13.3",
@@ -21,10 +18,10 @@
     "ejs": "~2.3.3",
     "express": "~4.13.1",
     "express-session": "~1.12.1",
-    "session-rethinkdb": "~1.0.7",
+    "flash": "~1.1.0",
     "hashids": "~1.0.1",
     "morgan": "~1.6.1",
     "rethinkdb": "~2.1.1",
-    "serve-favicon": "~2.3.0"
+    "bcryptjs": "~2.3.0 "
   }
 }

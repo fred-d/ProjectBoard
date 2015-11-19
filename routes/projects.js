@@ -30,7 +30,7 @@ router.get(["/projects","/projects/:filter","/projects/:filter/:order"], functio
 
      if(req.app.locals.order == 'newest') {
         r.connect(config.get('database'), function(err, conn) {
-            if (err) return new Error('Database Connection Error');
+            if (err) return next(Error('Database Connection Error'));
 
             r.table('projects').filter(filterStatement())
                 .orderBy(r.desc('timestamp')).run(conn, function(err, cursor)  {

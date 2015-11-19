@@ -1,11 +1,11 @@
 var express = require('express');
 var session = require('express-session');
-var sessionRDBConnector = require('session-rethinkdb');
 var path = require('path');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('config');
+var flash = require('flash');
 
 var home = require('./routes/index');
 var projects = require('./routes/projects');
@@ -13,8 +13,8 @@ var project = require('./routes/project');
 var manage = require('./routes/manage');
 var api = require('./routes/api');
 
-
 var app = express();
+
 app.use(session({
   secret: config.get('crypto.secret'),
   //store: new sessionRDBConnector(config.get('database')),
@@ -23,10 +23,23 @@ app.use(session({
   saveUninitialized: true
 }));
 
+app.use(flash());
+
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 }));
+
+app.EnsureLoggedin = function(req, res, valid){
+  console.log('Checking to see if user is logged in... ');
+  if(req.session.user == undefined){
+    return res.redirect('login');
+  } else valid();
+};
+
+app.EnsureAdmin = function() {
+  console.log('Checking to see is user is admin...');
+};
 
 /* Locals Middleware: adds some context that gets past down to every template */
 app.use(function(req, res, next) {
