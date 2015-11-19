@@ -31,9 +31,8 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 }));
 
 app.EnsureLoggedin = function(req, res, valid){
-  console.log('Checking to see if user is logged in... ');
   if(req.session.user == undefined){
-    return res.redirect('login');
+    return res.redirect('/login');
   } else valid();
 };
 
