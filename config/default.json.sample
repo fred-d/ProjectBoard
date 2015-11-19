@@ -2,7 +2,7 @@
   "mode": "dev", // Either `dev` or `prod` - Defines whether or not to print detailed error messages.
 
   "web": {
-    "port": 3000, // Port to host ProjectBoard on. This will always be HTTP
+    "port": 3012, // Port to host ProjectBoard on. This will always be HTTP
     "hostname": "127.0.0.1" // What host to bind to
     /* Simple Hostname Field Examples
      * 0.0.0.0 - Will bind and accept connections from anybody, assuming you have no firewall in place.

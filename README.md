@@ -12,9 +12,12 @@ ProjectBoard was written in Nodejs with Express and RethinkDB.
 1. Get the codebase `git clone https://github.com/TylerWebDev/ProjectBoard.git`
 2. Enter the newly made directory `cd ProjectBoard/`
 3. Get the necessary dependencies `npm install`
+4. Copy `config/default.json.sample` to `config/default.json`
+  * Make sure to check over the settings so that they meet your environment's requirement.
+  * To learn more about configuration files, visit https://www.npmjs.com/package/config#introduction
 4. Start up the server `npm start`
   * If you want to run the website tethered to the console (great for debuging), run `node bin/ProjectBoard`
-5. Navigate to `http://localhost:3012`
+5. Navigate to `http://localhost:3012/`
 
 ### Legal
 
