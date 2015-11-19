@@ -1,21 +1,37 @@
 {
+  "mode": "dev", // Either `dev` or `prod` - Defines whether or not to print detailed error messages.
+
   "web": {
-    "port": 3000,
-    "hostname": "0.0.0.0"
+    "port": 3000, // Port to host ProjectBoard on. This will always be HTTP
+    "hostname": "127.0.0.1" // What host to bind to
+    /* Simple Hostname Field Examples
+     * 0.0.0.0 - Will bind and accept connections from anybody, assuming you have no firewall in place.
+     * localhost or 127.0.0.1 - Only available to your local machine. This is good for development.
+     * projectboard.example.org - Will only accept connections from people attempting to connect to the IP associated
+     *                            with the specified domain name.
+     * 208.66.76.123 - Will only accept connections from people attempting to connect to the specified public IP
+     * 192.168.0.104 - Will accept connections going to the specified private IP address. This is allow anyone on the
+     *                 same network to also view ProjectBoard but will not allow anyone from the internet to see it.
+     */
   },
-  "database": {
+
+  "database": { // For detailed options, See rDB API: https://www.rethinkdb.com/api/javascript/
     "host": "rethink.example.com",
     "port": 28015,
     "db": "ProjectBoard",
-    "authKey": "Swordfish"
+    // "authKey": "swordfish" // Example of a password to connect to a rethinkDB server.
   },
-  "auth": {
+
+  /*"auth": { // You only need this block if you want to integrate ProjectBoard with Github's OAuth API
     "github": {
-      "client-id": "12345678901234567890e",
-      "client-secret": "06c4b04b9f9d57c3357ca8766b3fb93e1220d446c3"
+      "client-id": "03198bd450e030591e21",
+      "client-secret": "9b65d2a0b6797b2dc92fe5638446c693c53fea05c"
     }
-  },
+  },*/
+
   "crypto": {
-    "secret": "57b30a54352c2740eccb0818dfc5bec6de23157dba8f057f60db09901e531647"
+    "secret": "730c43f6c7222dbc8d94c145466660d6711e3577c57cb3e705f7528e2cf0a361", // Make this long, random, and secret
+    // Try getting some randomness from http://www.xorbin.com/tools/sha256-hash-calculator or http://random.org/
+    "hashIterations": 8 // How many times BCrypt should hash an input; Don't touch this unless you know what your doing
   }
 }
