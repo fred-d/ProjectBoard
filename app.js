@@ -12,12 +12,12 @@ var projects = require('./routes/projects');
 var project = require('./routes/project');
 var manage = require('./routes/manage');
 var api = require('./routes/api');
+var login = require('./routes/login');
 
 var app = express();
 
 app.use(session({
   secret: config.get('crypto.secret'),
-  //store: new sessionRDBConnector(config.get('database')),
   resave: true,
   name: '_pbsid',
   saveUninitialized: true
@@ -27,30 +27,34 @@ app.use(flash());
 
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-    extended: true
+  extended: true
 }));
 
-app.EnsureLoggedin = function(req, res, valid){
-  if(req.session.user == undefined){
-    return res.redirect('/login');
+app.EnsureLoggedin = function (req, res, valid) {
+  if (req.session.user == undefined) {
+    req.flash('warning', "Please log in before you complete this action");
+    req.session.requestedPath = req.originalUrl;
+    res.redirect('/login');
   } else valid();
 };
 
-app.EnsureAdmin = function() {
+app.EnsureAdmin = function () {
   console.log('Checking to see is user is admin...');
 };
 
 /* Locals Middleware: adds some context that gets past down to every template */
-app.use(function(req, res, next) {
-    app.locals = {
-        app: {
-            version: 0.1
-        },
-        page: {
-            path: req.path
-        }
-    };
-    next();
+app.use(function (req, res, next) {
+  app.locals = {
+    user: req.session.user,
+
+    app: {
+      version: 0.1
+    },
+    page: {
+      path: req.path
+    }
+  };
+  next();
 });
 
 // view engine setup
@@ -67,12 +71,13 @@ app.use(home);
 app.use(projects);
 app.use(project);
 app.use(manage);
+app.use(login);
 
 //Add in the api route handler
 app.use(api);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -80,18 +85,18 @@ app.use(function(req, res, next) {
 
 // development error handler
 // will print stacktrace
-app.use(function(err, req, res, next) {
-    res.status(err.status || 500);
+app.use(function (err, req, res, next) {
+  res.status(err.status || 500);
 
-    if(err.status == 404) {
-        res.render('404');
-    } else {
-        res.render('error', {
-            message: err.message,
-            error: err
-        });
-    }
-    next();
+  if (err.status == 404) {
+    res.render('404');
+  } else {
+    res.render('error', {
+      message: err.message,
+      error: err
+    });
+  }
+  next();
 });
 
 module.exports = app;

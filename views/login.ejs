@@ -14,7 +14,7 @@
         <div class="col-sm-5">
             <h2>Please sign in</h2>
           <% while(message = flash.shift()) {%>
-            <p class="alert alert-<%=message.type%>" role="alert"><%=message.message%></p>
+            <p class="alert alert-<%=message.type%>" role="alert"><%-message.message%></p>
           <% } %>
             <form class="form-horizontal" action="/login" method="post">
                 <div class="form-group">
@@ -54,6 +54,7 @@
                 You don't, stupid. It doesn't work yet.
               </p>
               <p>How do you feel to be insulted by a website? </p>
+              <p><%=requestedPath%></p>
             </div>
         </div>
         <% if(!modal) { %>
