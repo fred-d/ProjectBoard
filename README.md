@@ -1,4 +1,4 @@
-ProjectBoard
+![logo](https://raw.githubusercontent.com/TylerWebDev/ProjectBoard/master/public/favicon-96x96.png) ProjectBoard
 ------------
 
 ProjectBoard Birthed out of the need to track ideas for projects within the
