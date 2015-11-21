@@ -55,9 +55,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/login/verify/:id', function (req, res) {
-  if(/(bot|slack)/i.exec(req.get('User-Agent')).index >= 0) {
-    res.redirect('/');
-  } else {
+  if(/(bot|slack)/i.exec(req.get('User-Agent')).index) {
     r.connect(config.get('database'), function (err, conn) {
       r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
         if (err) console.log(err);
@@ -75,6 +73,8 @@ router.get('/login/verify/:id', function (req, res) {
         res.redirect('/login');
       });
     });
+  } else {
+    res.redirect('/');
   }
 });
 
