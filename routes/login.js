@@ -10,7 +10,7 @@ router.get('/login(/modal)?', function (req, res) {
   if (req.session.requestedPath == undefined) path = '/';
   else path = req.session.requestedPath;
 
-  var modalMode = req.originalUrl == '/admin/login/modal';
+  var modalMode = req.originalUrl == '/login/modal';
   res.render('login', {title: 'Log In', modal: modalMode, requestedPath: path});
 });
 

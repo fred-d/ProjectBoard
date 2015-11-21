@@ -10,6 +10,7 @@
 <body>
     <% include navigation %>
     <% } %>
+    <div class="container">
         <div class="col-sm-5">
             <h2>Please sign in</h2>
           <% while(message = flash.shift()) {%>
@@ -45,6 +46,7 @@
                 </div>
             </form>
         </div>
+      <%if (!modal) {%>
         <div class="col-sm-7">
             <div class="well">
                 <h2>Changelog</h2>
@@ -55,6 +57,8 @@
               <p>There's nothing here...</p>
             </div>
         </div>
+      <% } %>
+    </div>
     <% if(!modal) { %>
     <% include footer %>
 </body>

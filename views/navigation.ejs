@@ -6,7 +6,7 @@
       document.getElementById("modal-body").innerHTML = ajax.responseText;
     }
   };
-  ajax.open("GET", "/project/new", true);
+  ajax.open("GET", "<%if(user){%>/project/new/modal<%}else {%>/login/modal<%}%>", true);
   ajax.send();
 </script>
 

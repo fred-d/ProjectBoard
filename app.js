@@ -83,9 +83,12 @@ if(config.has('3rd-party.slack.token')) {
   bot.on('start', function() {
     console.info('SlackBot has been enabled');
     app.slackbot = bot;
+    bot.postMessageToChannel('projectboard-log', 'i\'m back online :D', {
+      icon_url: 'https://projects.tylerwebdev.io/images/logo-small.png'
+    }, function () {
+    });
   });
 }
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

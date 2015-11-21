@@ -28,12 +28,9 @@ router.post("/project", function(req, res, next){
     });
 });
 
-router.get('/project/new', function(req, res) {
-  res.render('createProject.ejs', {modal: false});
-});
-
-router.get('/project/new/modal', function(req, res{
-  res.render('createProject.ejs', {modal: true});
+router.get('/project/new(/modal)?', function(req, res) {
+  var modalMode = req.originalUrl == '/project/new/modal';
+  res.render('createProject.ejs', {title: 'Create a New Project - ProjectBoard', modal: modalMode});
 });
 
 router.get("/project/:id", function(req, res, next) {
