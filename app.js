@@ -6,6 +6,7 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var config = require('config');
 var flash = require('flash');
+var slackbot = require('slackbots');
 
 var home = require('./routes/index');
 var projects = require('./routes/projects');
@@ -22,9 +23,7 @@ app.use(session({
   name: '_pbsid',
   saveUninitialized: true
 }));
-
 app.use(flash());
-
 app.use(bodyParser.json());       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
@@ -75,6 +74,18 @@ app.use(login);
 
 //Add in the api route handler
 app.use(api);
+
+if(config.has('3rd-party.slack.token')) {
+  var bot = new slackbot({
+    token: config.get('3rd-party.slack.token'),
+    name: "Project Board"
+  });
+  bot.on('start', function() {
+    console.log('SlackBot has been enabled');
+    app.slackbot = bot;
+  });
+}
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

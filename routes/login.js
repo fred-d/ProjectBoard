@@ -116,18 +116,12 @@ router.post('/register', function (req, res, next) {
                   if (err) return next(Error(err));
 
                   console.log(response);
-                  res.flash('info', 'Account successfully created! Check your email for a verification link.');
+                  res.flash('info', 'Account successfully created! Check your slack for a verification link.');
                   res.redirect('login');
 
-                  mailgun.messages().send({
-                    from: 'Tyler Web Dev <no-reply@projects.tylerwebdev.io>',
-                    to: req.body.email,
-                    subject: 'Verify your ProjectBoard Account',
-                    text: "Hi!<br />To verify your ProjectBoard account, click " +
-                    "<a href=https://projects.tylerwebdev.io/login/verify/" + response.generated_keys[0] + "'>this link</a>"
-                  }, function (error, body) {
-                    console.log(body);
-                  });
+                  var message = "Hey, "+req.body.fullname.split(' ')[0]+"! Welcome to ProjectBoard.\nClick this link " +
+                    "to verify your account: https://project.tylerwebdev.io/login/verify/"+response.generated_keys[0];
+                  req.app.slackbot.postMessageToUser(req.body.username, message, {}, function(){});
                 });
               }
             });
