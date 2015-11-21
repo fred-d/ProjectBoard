@@ -55,7 +55,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/login/verify/:id', function (req, res) {
-  if(/(bot|slack)/i.exec(req.get('User-Agent')).index) {
+  if(/(bot|slack)/i.exec(req.get('User-Agent')) == null) {
     r.connect(config.get('database'), function (err, conn) {
       r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
         if (err) console.log(err);
