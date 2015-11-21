@@ -57,10 +57,12 @@ router.post('/login', function (req, res, next) {
 router.get('/login/verify/:id', function (req, res) {
   r.connect(config.get('database'), function (err, conn) {
     r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
+      if(err) console.log(err);
+
       if (response.replaced == 1) {
         req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
 
-        r.table('users').get(req.params).run(conn, function(err, response) {
+        r.table('users').get(req.params.id).run(conn, function(err, response) {
           req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function(){});
         });
       } else {
