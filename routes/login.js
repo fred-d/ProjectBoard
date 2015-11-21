@@ -4,8 +4,6 @@ var bcrypt = require('bcryptjs');
 var crypto = require('crypto');
 var config = require('config');
 var r = require('rethinkdb');
-var mailgun = require('mailgun-js')
-({apiKey: config.get("3rd-party.mailgun.api_key"), domain: config.get("3rd-party.mailgun.domain")});
 
 router.get('/login(/modal)?', function (req, res) {
   var path;
@@ -17,8 +15,6 @@ router.get('/login(/modal)?', function (req, res) {
 });
 
 router.post('/login', function (req, res, next) {
-  console.log(bcrypt.hashSync(req.body.password, config.get('crypto.hashIterations')));
-
   r.connect(config.get('database'), function (err, conn) {
     if (err) return res.flash('danger', 'Database connection failure. Please try again later.').redirect('/login');
 
@@ -63,6 +59,10 @@ router.get('/login/verify/:id', function (req, res) {
     r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
       if (response.replaced == 1) {
         req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
+
+        r.table('users').get(req.params).run(conn, function(err, response) {
+          req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function(){});
+        });
       } else {
         req.flash('danger', 'An error accoured. Please contact an administrator if you cannot log into your acount');
       }
@@ -115,7 +115,6 @@ router.post('/register', function (req, res, next) {
                 }).run(conn, function (err, response) {
                   if (err) return next(Error(err));
 
-                  console.log(response);
                   res.flash('info', 'Account successfully created! Check your slack for a verification link.');
                   res.redirect('login');
 
