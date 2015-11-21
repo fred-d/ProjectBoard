@@ -55,30 +55,25 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/login/verify/:id', function (req, res) {
-  if(req.get('User-Agent').split(' ').indexOf('Slackbot') +
-     req.get('User-Agent').split(' ').indexOf('Slack-ImgProxy') +
-     req.get('User-Agent').split(' ').indexOf('Slackbot-LinkExpanding')
-    > 0) {
-    res.send("Click the link to verify your ProjectBoard account. Or, if you never requested an account, simply " +
-      "ignore this message.")
-  } else {
-    r.connect(config.get('database'), function (err, conn) {
-      r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
-        if(err) console.log(err);
+  console.log(req.get('User-Agent').search('/(bot|slack)/i'));
 
-        if (response.replaced == 1) {
-          req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
+  r.connect(config.get('database'), function (err, conn) {
+    r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
+      if (err) console.log(err);
 
-          r.table('users').get(req.params.id).run(conn, function(err, response) {
-            req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function(){});
+      if (response.replaced == 1) {
+        req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
+
+        r.table('users').get(req.params.id).run(conn, function (err, response) {
+          req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function () {
           });
-        } else {
-          req.flash('danger', 'An error accoured. Please contact an administrator if you cannot log into your acount');
-        }
-        res.redirect('/login');
-      });
+        });
+      } else {
+        req.flash('danger', 'An error accoured. Please contact an administrator if you cannot log into your acount');
+      }
+      res.redirect('/login');
     });
-  }
+  });
 });
 
 router.get('/logout', function (req, res) {
@@ -128,9 +123,10 @@ router.post('/register', function (req, res, next) {
                   res.flash('info', 'Account successfully created! Check your slack for a verification link.');
                   res.redirect('login');
 
-                  var message = "Hey, "+req.body.fullname.split(' ')[0]+"! Welcome to ProjectBoard.\nClick this link " +
-                    "to verify your account: https://project.tylerwebdev.io/login/verify/"+response.generated_keys[0];
-                  req.app.slackbot.postMessageToUser(req.body.username, message, {}, function(){});
+                  var message = "Hey, " + req.body.fullname.split(' ')[0] + "! Welcome to ProjectBoard.\nClick this link " +
+                    "to verify your account: https://project.tylerwebdev.io/login/verify/" + response.generated_keys[0];
+                  req.app.slackbot.postMessageToUser(req.body.username, message, {}, function () {
+                  });
                 });
               }
             });
