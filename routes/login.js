@@ -55,27 +55,27 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/login/verify/:id', function (req, res) {
-  console.log(req.get('User-Agent'));
-  console.log(/(bot|slack)/i.exec(req.get('User-Agent')));
-  //console.log(req.get('User-Agent').match('/(bot|slack)/i'));
+  if(/(bot|slack)/i.exec(req.get('User-Agent')) == null) {
+    res.redirect('/');
+  } else {
+    r.connect(config.get('database'), function (err, conn) {
+      r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
+        if (err) console.log(err);
 
-  r.connect(config.get('database'), function (err, conn) {
-    r.table('users').get(req.params.id).update({verified: true}).run(conn, function (err, response) {
-      if (err) console.log(err);
+        if (response.replaced == 1) {
+          req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
 
-      if (response.replaced == 1) {
-        req.flash('info', 'You\'ve successfully verified your email! Feel free to log in now.');
-
-        r.table('users').get(req.params.id).run(conn, function (err, response) {
-          req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function () {
+          r.table('users').get(req.params.id).run(conn, function (err, response) {
+            req.app.slackbot.postMessageToUser(response.username, "Welcome to ProjectBoard! :)", {}, function () {
+            });
           });
-        });
-      } else {
-        req.flash('danger', 'An error accoured. Please contact an administrator if you cannot log into your acount');
-      }
-      res.redirect('/login');
+        } else {
+          req.flash('danger', 'An error accoured. Please contact an administrator if you cannot log into your acount');
+        }
+        res.redirect('/login');
+      });
     });
-  });
+  }
 });
 
 router.get('/logout', function (req, res) {
