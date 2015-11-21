@@ -1,4 +1,15 @@
 <!--<a href="https://github.com/TylerWebDev/Tyler-Sirens" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;   z-index: 1001;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>-->
+<script>
+  var ajax = new XMLHttpRequest();
+  ajax.onreadystatechange = function () {
+    if (ajax.readyState == 4 && ajax.status == 200) {
+      document.getElementById("modal-body").innerHTML = ajax.responseText;
+    }
+  };
+  ajax.open("GET", "/project/new", true);
+  ajax.send();
+</script>
+
 <nav class="navbar navbar-default navbar-static-top navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -22,9 +33,9 @@
           <li role="separator" class="divider"></li>
           <li>
             <% if(user == undefined) { %>
-              <a href="/login">Log In</a>
+            <a href="/login">Log In</a>
             <% } else { %>
-              <a href="/logout">Log out</a>
+            <a href="/logout">Log out</a>
             <% } %>
           </li>
         </ul>
@@ -39,39 +50,13 @@
 <div id="proposalModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
-      <form action="/project" method="post">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">New Project</h4>
-        </div>
-        <div class="modal-body">
-          <h4>Describe your project</h4>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">New Project</h4>
+      </div>
+      <div class="modal-body" id="modal-body">
 
-          <div class="form-group">
-            <label for="projectName">Project Name</label>
-            <input type="text" class="form-control" id="projectName" name="projectName" placeholder="Project Name"
-                   required aria-required="true" autofocus>
-          </div>
-          <div class="form-group">
-            <label for="projectSummary">Summary</label>
-            <input type="text" class="form-control" id="projectSummary" name="projectSummary"
-                   placeholder="Project Summary" required aria-required="true">
-          </div>
-          <div class="input-group">
-            <!--<label for="projectSummary">Project Leader</label>-->
-                        <span class="input-group-addon">
-                            <input type="checkbox" id="projectLeader" name="projectLeader"
-                                   aria-label="Toggle Project Leader" checked>
-                         </span>
-            <input type="text" class="form-control" id="projectLeaderName" name="projectLeaderName"
-                   placeholder="Project Leader" aria-label="Project Leader" required>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Ship it!</button>
-        </div>
-      </form>
+      </div>
     </div>
   </div>
 </div>
