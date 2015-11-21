@@ -81,7 +81,7 @@ if(config.has('3rd-party.slack.token')) {
     name: "Project Board"
   });
   bot.on('start', function() {
-    console.log('SlackBot has been enabled');
+    console.info('SlackBot has been enabled');
     app.slackbot = bot;
   });
 }

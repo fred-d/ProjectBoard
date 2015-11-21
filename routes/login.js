@@ -55,7 +55,7 @@ router.post('/login', function (req, res, next) {
 });
 
 router.get('/login/verify/:id', function (req, res) {
-  if(/(bot|slack)/i.exec(req.get('User-Agent')) == null) {
+  if(/(bot|slack)/i.exec(req.get('User-Agent')).index >= 0) {
     res.redirect('/');
   } else {
     r.connect(config.get('database'), function (err, conn) {
